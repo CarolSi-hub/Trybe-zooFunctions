@@ -1,19 +1,5 @@
-/*
-eslint no-unused-vars: [
-  "error",
-  {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
-  }
-]
-*/
 
-const { animals } = require('./data');
-const { prices } = require('./data');
-const { hours } = require('./data');
-const { employees } = require('./data');
-const data = require('./data');
+const { animals, prices, hours, employees, data } = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animal, count) => animal.id === ids[count]);
@@ -27,10 +13,10 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   const name = employeeName;
-  if (name !== undefined) {
-    return employees.find(item => item.firstName === name || item.lastName === name);
-  }
-  return ({});
+  const result = name !== undefined ? 
+  employees.find(item => item.firstName === name || item.lastName === name) :
+  {}  
+  return result;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -67,7 +53,7 @@ function entryCalculator(entrants) {
   if (entrants !== undefined && entrants !== {}) {
     const entrantsKeys = Object.keys(entrants);
     return entrantsKeys.reduce((acc, key) => {
-      acc += entrants[key] * data.prices[key];
+      acc += entrants[key] * prices[key];
       return acc;
     }, 0);
   }
